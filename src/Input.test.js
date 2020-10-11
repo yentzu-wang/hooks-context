@@ -1,4 +1,4 @@
-import React, { useState as useStateMock } from "react"
+import React from "react"
 import { shallow } from "enzyme"
 import Input from "./Input"
 import { checkProps, findByTestAttr } from "../test/testUtils"
@@ -18,17 +18,28 @@ test("does not throw warning with expected props", () => {
 })
 
 describe("state controlled input field", () => {
-  test("state updates with value of input box upon change", () => {
-    const mockSetCurrentGuess = jest.fn()
-    const useStateSpy = jest.spyOn(React, "useState")
-    useStateSpy.mockImplementation(() => ["", mockSetCurrentGuess])
+  const mockSetCurrentGuess = jest.fn()
+  let wrapper
 
-    const wrapper = setup()
+  beforeEach(() => {
+    mockSetCurrentGuess.mockClear()
+    React.useState = jest.fn(() => ["", mockSetCurrentGuess])
+    wrapper = setup()
+  })
+
+  test("state updates with value of input box upon change", () => {
     const inputBox = findByTestAttr(wrapper, "input-box")
 
     const mockEvent = { target: { value: "train" } }
     inputBox.simulate("change", mockEvent)
 
     expect(mockSetCurrentGuess).toHaveBeenCalledWith("train")
+  })
+
+  test("field is cleared upon submit button click", () => {
+    const submitButton = findByTestAttr(wrapper, "submit-button")
+
+    submitButton.simulate("click", { preventDefault: jest.fn() })
+    expect(mockSetCurrentGuess).toHaveBeenCalledWith("")
   })
 })
