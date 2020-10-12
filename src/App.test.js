@@ -23,7 +23,7 @@ test("App renders without error", () => {
 describe("getSecretWord calls", () => {
   test("getSecretWord gets called on App mount", () => {
     setup()
-    // che3ck to see if secret word was updated
+    // check to see if secret word was updated
     expect(mockGetSecretWord).toHaveBeenCalled()
   })
 })
