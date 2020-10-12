@@ -6,7 +6,7 @@ const Input = () => {
 
   return (
     <div data-test="component-input">
-      <form clasName="form-inline">
+      <form className="form-inline">
         <input
           data-test="input-box"
           className="mb-2 mx-sm-3"

@@ -1,4 +1,5 @@
 import React from "react"
+import Input from "./Input"
 import hookActions from "./actions/hookActions"
 
 import "./App.css"
@@ -24,7 +25,11 @@ function App() {
   const setSecretWord = secretWord =>
     dispatch({ type: "setSecretWord", payload: secretWord })
 
-  return <div data-test="component-app" />
+  return (
+    <div data-test="component-app">
+      <Input secretWord={state.secretWord} />
+    </div>
+  )
 }
 
 export default App
