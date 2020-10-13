@@ -2,7 +2,18 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const LanguagePicker = ({ setLanguage }) => {
-  return <div data-test="component-language-picker">LanguagePicker</div>
+  const languages = [
+    { code: "en", symbol: "🇺🇸" },
+    { code: "emoji", symbol: "😊" }
+  ]
+
+  const languageIcons = languages.map(lang => (
+    <span data-test="language-icon" key={lang.code}>
+      {lang.symbol}
+    </span>
+  ))
+
+  return <div data-test="component-language-picker">{languageIcons}</div>
 }
 
 LanguagePicker.propTypes = {
