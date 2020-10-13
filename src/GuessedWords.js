@@ -1,10 +1,10 @@
 import React from "react"
-
 import languageContext from "./contexts/languageContext"
+import guessedWordsContext from "./contexts/guessedWordsContext"
 import stringsModule from "./helpers/strings"
 
 const GuessedWords = () => {
-  const guessedWords = []
+  const [guessedWords] = guessedWordsContext.useGuessedWords()
   const language = React.useContext(languageContext)
   let contents
 
