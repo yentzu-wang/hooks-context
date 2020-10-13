@@ -31,7 +31,7 @@ describe("languagePicker", () => {
 
   test("correctly renders congrats string in emoji", () => {
     const wrapper = setup({ success: true, language: "emoji" })
-    expect(wrapper.text()).toBe("")
+    expect(wrapper.text()).toBe("🎯🎉")
   })
 })
 
