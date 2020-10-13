@@ -1,5 +1,6 @@
 import React from "react"
 import languageContext from "./contexts/languageContext"
+import successContext from "./contexts/successContext"
 import stringModule from "./helpers/strings"
 
 /**
@@ -8,7 +9,7 @@ import stringModule from "./helpers/strings"
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is false).
  */
 const Congrats = () => {
-  const success = null
+  const [success] = successContext.useSuccess()
   const language = React.useContext(languageContext)
 
   if (success) {

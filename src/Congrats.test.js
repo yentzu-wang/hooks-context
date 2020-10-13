@@ -1,10 +1,9 @@
 import React from "react"
-import { shallow, mount } from "enzyme"
+import { mount } from "enzyme"
 import Congrats from "./Congrats"
 import languageContext from "./contexts/languageContext"
+import successContext from "./contexts/successContext"
 import { findByTestAttr } from "../test/testUtils"
-
-const defaultProps = { success: false }
 
 /**
  * Factory function to create a ShallowWrapper for the Congrats component.
@@ -18,7 +17,9 @@ const setup = ({ success, language }) => {
 
   return mount(
     <languageContext.Provider value={language}>
-      <Congrats />
+      <successContext.SuccessProvider value={[success, jest.fn()]}>
+        <Congrats />
+      </successContext.SuccessProvider>
     </languageContext.Provider>
   )
 }
