@@ -2,11 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import languageContext from "./contexts/languageContext"
 import successContext from "./contexts/successContext"
+import guessedWordsContext from "./contexts/guessedWordsContext"
+import { getLetterMatchCount } from "./helpers"
 import stringModule from "./helpers/strings"
 
 const Input = ({ secretWord }) => {
   const language = React.useContext(languageContext)
   const [success, setSuccess] = successContext.useSuccess()
+  const [guessedWords, setGuessedWords] = guessedWordsContext.useGuessedWords()
   const [currentGuess, setCurrentGuess] = React.useState("")
 
   if (success) {
@@ -32,7 +35,16 @@ const Input = ({ secretWord }) => {
           className="btn btn-parimary mb-2"
           onClick={e => {
             e.preventDefault()
-            // TODO: update guessedWords
+            // update guessedWords
+            const letterMatchCount = getLetterMatchCount(
+              currentGuess,
+              secretWord
+            )
+            const newGuessedWords = [
+              ...guessedWords,
+              { guessedWord: currentGuess, letterMatchCount }
+            ]
+            setGuessedWords(newGuessedWords)
             // check against secretWord and update success if needed
             if (currentGuess === secretWord) {
               setSuccess(true)
